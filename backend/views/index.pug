@@ -1,0 +1,61 @@
+extends layout
+
+block content
+  h1= title
+
+  div(class="col-md-4")
+    h2 Create user
+
+    form(action="/users/create", method="post", class="well")
+      div(class="form-group")
+        label(for="firstname")
+          | First Name
+        input(type="text", name="firstname", class="form-control")
+
+        label(for="lastname")
+          | Last Name
+        input(type="text", name="lastname", class="form-control")
+
+        label(for="birthday")
+          | Birthday
+        input(type="text", name="birthday", class="form-control")
+      input(type="submit" class="btn btn-default")
+
+  div(class="col-md-6")
+    h2 Users
+    form(action="/", method="post")
+      div(class="form-group")
+        input(type="text", name="search", class="form-control", placeholder="Search")
+    
+    ul
+    each user in users
+      li
+        strong
+          = user.firstname + ' || ' + user.lastname + ' || ' + user.birthday
+        | &nbsp;
+        a(href="/users/" + user.id + "/destroy", class="btn btn-xs btn-warning") delete
+        | &nbsp; &nbsp;
+        input(type='button' class="btn btn-xs btn-info btn_update" id='user'+user.id value='update')
+      
+      form(action="/users/update", method="post")
+        div(class="form-group userupdateform" id='updateuserform'+user.id)
+          input(type="text", name="firstname", class="onefourth form-control", placeholder="firstname" value=user.firstname)
+          input(type="text", name="lastname", class="onefourth form-control", placeholder="lastname" value=user.lastname)
+          input(type="text", name="birthday", class="onefourth form-control", placeholder="birthday" value=user.birthday)
+          input(type="hidden", name="userid", value=user.id)
+          input(type="submit" class="btn btn-default onefifth")
+          div(style='clear:both')
+      ul
+        li
+          | Create task
+          form(action="/users/" + user.id + "/tasks/create", method="post", class="form-inline")
+            div(class="form-group")
+              input(type="text", name="title", class="input-sm form-control")
+              input(type="text", name="overview", class="input-sm form-control")
+              input(type="submit", class="btn btn-sm btn-default")
+        each task in user.Tasks
+          li
+            strong
+              = task.title + '  ' + task.overview
+            | &nbsp;
+            a(href="/users/" + user.id + "/tasks/" + task.id + "/destroy",  class="btn btn-xs btn-warning") delete

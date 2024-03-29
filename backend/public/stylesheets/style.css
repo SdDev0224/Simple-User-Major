@@ -1,0 +1,33 @@
+body {
+  padding: 50px;
+  font: 14px "Helvetica Neue","Open Sans",sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+h1, h2 {
+  font-weight: 100;
+}
+
+h1 {
+  font-size: 35px;
+}
+
+ul li {
+  padding: 5px;
+}
+
+.onefourth{
+  width: 25% !important;
+  float:left;
+  margin-right:2%;
+}
+.onefifth{
+  width:15% !important;
+  float:left;
+}
+.userupdateform{
+  display:none;
+}
